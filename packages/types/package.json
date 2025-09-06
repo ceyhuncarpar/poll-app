@@ -1,0 +1,19 @@
+{
+  "name": "@repo/types",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./poll": {
+      "types": "./src/poll.ts",
+      "default": "./dist/poll.js"
+    }
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "typescript": "latest"
+  }
+}
