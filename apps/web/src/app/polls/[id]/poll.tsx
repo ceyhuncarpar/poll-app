@@ -41,7 +41,8 @@ export default function Poll() {
         <div className='p-4 h-full justify-center content-center max-w-5xl self-center justify-self-center'>
           <p className='font-medium text-2xl text-center'>{data.question}</p>
 
-          <div className='flex flex-col gap-2 mt-4'>
+          <p className='mt-4 mb-1 text-sm'>Press any option to vote</p>
+          <div className='flex flex-col gap-2'>
             {data.options.map((option) => (
               <Option
                 key={option.id}

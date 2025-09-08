@@ -49,9 +49,8 @@ export const Poll = () => {
             {data.question}
           </Text>
 
-          {isFetching && <Text>fetching</Text>}
-
-          <View className='gap-2 mt-4'>
+          <Text className='mt-4 mb-1 text-sm'>Press any option to vote</Text>
+          <View className='gap-2'>
             {data.options.map((option) => (
               <Option
                 key={option.id}
