@@ -17,10 +17,12 @@ export const pollsApi = createApi({
             ]
           : [{ type: 'Polls', id: 'LIST' }]
     }),
+
     getPollById: build.query<Poll, string>({
       query: (id) => `polls/${id}`,
       providesTags: (result, error, id) => [{ type: 'Polls', id }]
     }),
+
     vote: build.mutation<Poll, { id: string; optionId: string }>({
       query(data) {
         const { id, ...body } = data
