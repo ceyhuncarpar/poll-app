@@ -1,0 +1,23 @@
+{
+  "name": "@repo/store",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "*": "./src/index.ts",
+    "default": "./dist/index.js"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
+    "react": "19.0.0",
+    "react-redux": "^9.2.0",
+    "@repo/types": "*"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "typescript": "latest"
+  }
+}
