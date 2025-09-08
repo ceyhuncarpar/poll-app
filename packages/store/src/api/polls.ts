@@ -3,23 +3,23 @@ import { baseApi } from '../config/api'
 import type { Poll } from '@repo/types/poll'
 
 export const pollsApi = createApi({
-  reducerPath: 'pokemonApi',
   baseQuery: baseApi,
-  tagTypes: ['Poll'],
+  reducerPath: 'pollsApi',
+  tagTypes: ['Polls'],
   endpoints: (build) => ({
     getAllPolls: build.query<Poll[], void>({
       query: () => `polls`,
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: 'Poll' as const, id })),
-              { type: 'Poll', id: 'LIST' }
+              ...result.map(({ id }) => ({ type: 'Polls' as const, id })),
+              { type: 'Polls', id: 'LIST' }
             ]
-          : [{ type: 'Poll', id: 'LIST' }]
+          : [{ type: 'Polls', id: 'LIST' }]
     }),
-    getPollById: build.query<Poll[], string>({
+    getPollById: build.query<Poll, string>({
       query: (id) => `polls/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Poll', id }]
+      providesTags: (result, error, id) => [{ type: 'Polls', id }]
     }),
     vote: build.mutation<Poll, { id: string; optionId: string }>({
       query(data) {
@@ -30,7 +30,20 @@ export const pollsApi = createApi({
           body
         }
       },
-      invalidatesTags: (result, error, { id }) => [{ type: 'Poll', id }]
+      // Tags can be invalidated here but we want to spesifically
+      // update the cached value since the api result also returns the
+      // updated value, so replace cache here instead of a forced refetch.
+      async onQueryStarted({ id }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+
+          dispatch(
+            pollsApi.util.updateQueryData('getPollById', id, () => {
+              return data
+            })
+          )
+        } catch (error) {}
+      }
     })
   })
 })
