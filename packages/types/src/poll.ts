@@ -9,7 +9,3 @@ export type Poll = {
   question: string
   options: VoteOption[]
 }
-
-export function log() {
-  console.log('hello')
-}
