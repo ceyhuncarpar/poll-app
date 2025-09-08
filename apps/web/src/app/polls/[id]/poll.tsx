@@ -38,7 +38,7 @@ export default function Poll() {
       <LoadingCover active={isMuationLoading} />
 
       <Container>
-        <div className='p-4 h-full justify-center content-center max-w-5xl self-center justify-self-center'>
+        <div className='h-full justify-center content-center max-w-5xl self-center justify-self-center'>
           <p className='font-medium text-2xl text-center'>{data.question}</p>
 
           <p className='mt-4 mb-1 text-sm'>Click any option to vote</p>
