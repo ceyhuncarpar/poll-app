@@ -63,14 +63,14 @@ export class PollsRepository implements IPollsRepository {
 
   async findById(id: string) {
     // Delay a bit to mimic a DB query.
-    await sleep(300)
+    await sleep(150)
 
     return this.records.find((r) => r.id === id)
   }
 
   async findByIdAndUpdate(id: string, update: Partial<Poll>) {
     // Delay a bit to mimic a DB query.
-    await sleep(300)
+    await sleep(150)
 
     let record = this.records.find((r) => r.id === id)
     if (!record) return record
