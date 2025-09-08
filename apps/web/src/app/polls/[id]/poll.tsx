@@ -1,20 +1,18 @@
+import { Container } from '@/components/container'
+import { LoadingCover } from '@/components/loading'
 import { useVoteMutation, useGetPollByIdQuery } from '@repo/store'
-import { View, Text, ActivityIndicator } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Container } from '../../components/container'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { Option } from './components/option'
-import { LoadingCover } from '../../components/loading'
+import { Spinner } from '@/components/spinner'
 
-export const Poll = () => {
-  const pollId = '1'
+export default function Poll() {
+  const { id: pollId } = useParams<{ id: string }>()
   const { data, isLoading, isError, isFetching } = useGetPollByIdQuery(pollId)
   const [vote, { isLoading: isMuationLoading }] = useVoteMutation()
   const [voted, setVoted] = useState<string | void>()
 
   async function handleVote(optionId: string) {
-    // if (voted) return
-
     const res = await vote({ id: pollId, optionId })
     if (res.error) return
 
@@ -22,17 +20,13 @@ export const Poll = () => {
   }
 
   if (isLoading) {
-    return (
-      <Container>
-        <ActivityIndicator size='large' />
-      </Container>
-    )
+    return <LoadingCover active={true} />
   }
 
   if (isError) {
     return (
       <Container>
-        <Text>Something went wrong while getting the poll.</Text>
+        <p>Something went wrong while getting the poll.</p>
       </Container>
     )
   }
@@ -44,14 +38,10 @@ export const Poll = () => {
       <LoadingCover active={isMuationLoading} />
 
       <Container>
-        <View className='h-full justify-center'>
-          <Text className='font-medium text-2xl text-center'>
-            {data.question}
-          </Text>
+        <div className='p-4 h-full justify-center content-center max-w-5xl self-center justify-self-center'>
+          <p className='font-medium text-2xl text-center'>{data.question}</p>
 
-          {isFetching && <Text>fetching</Text>}
-
-          <View className='gap-2 mt-4'>
+          <div className='flex flex-col gap-2 mt-4'>
             {data.options.map((option) => (
               <Option
                 key={option.id}
@@ -60,8 +50,8 @@ export const Poll = () => {
                 voted={voted}
               />
             ))}
-          </View>
-        </View>
+          </div>
+        </div>
       </Container>
     </>
   )
