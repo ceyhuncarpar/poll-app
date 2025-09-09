@@ -21,7 +21,7 @@ This is a monorepo sharing business logic and entity schema types, leveraging <s
 
 Make sure ports 5001, 3000 and 8081 are available on your environment.
 
-Since this project is a monorepo, Turborepo helps us start each app concurently without a hassle. Simply run each command on the root directory:
+Since this project is a monorepo, Turborepo helps us start each app concurrently without a hassle. Simply run each command on the root directory:
 
 ```bash
 // install dependencies
@@ -39,11 +39,11 @@ Shared packages between apps.
 
 ### types
 
-Types representing entity schemas or basic types that any app or package need to access.
+Types representing entity schemas or basic types that any app or package needs to access.
 
 ### store
 
-Powered by <strong>Redux Toolkit</strong> and <strong>RTK Query</strong>, this package is responsible for the entire server-state related business logic and API, alongside regular redux responsibilites with centralized state management for front-end apps. RTK Query helps with automatic caching on the redux store and code splitting with it's out of the box approach. This way business logic and rendering state are splitted gracefully.
+Powered by <strong>Redux Toolkit</strong> and <strong>RTK Query</strong>, this package is responsible for the entire server-state related business logic and API, alongside regular redux responsibilities with centralized state management for front-end apps. RTK Query helps with automatic caching on the redux store and code splitting with it's out of the box approach. This way business logic and rendering state are split gracefully.
 
 <strong>`src/config/store`:</strong> Main redux configuration. <br/>
 <strong>`src/config/api`:</strong> Basic API configuration with RTK Query's built-in fetchBaseQuery. <br/>
@@ -64,17 +64,17 @@ Built with Nest.js, this application implements design patterns to maintain a cl
 
 <strong>Structure:</strong> <br/>
 <strong>`polls.repository.ts`:</strong> Implements data storage and retrieval methods. <br/>
-<strong>`polls.service.ts`:</strong> Main orhcestrator and service consumer of poll related actions. <br/>
-<strong>`polls.controller.ts`:</strong> Reponsible for handling HTTP requests, validation and main service method invocations. <br/>
+<strong>`polls.service.ts`:</strong> Main orchestrator and service consumer of poll related actions. <br/>
+<strong>`polls.controller.ts`:</strong> Responsible for handling HTTP requests, validation and main service method invocations. <br/>
 
 ### mobile
 
 Built with Expo React-Native. Fetches and displays a poll, when a poll option is selected updates the server with an HTTP request and displays the updated data while highlighting the latest selected option. Multiple votes can be given within the same session.
 
-<strong>`src/components`:</strong> Shared components accross the application are stored here.<br/>
+<strong>`src/components`:</strong> Shared components across the application are stored here.<br/>
 <strong>`src/screens`:</strong> Individual app screens.
 
 ### web
 Built with Next.js. The structure and flow is mostly the same as the mobile app. But this one comes in black (:
 
-One caveat is this app uses app router, the root route automatically redirects the user to `/polls/1`. This also replaces the screens aproach.
+One caveat is this app uses app router, the root route automatically redirects the user to `/polls/1`. This also replaces the screens approach.
