@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { Poll } from '@repo/types/poll'
+import { Poll } from '@repo/types'
 import { sleep } from 'src/utils'
 /**
  * Polls repository, basically mimicking a real DB.

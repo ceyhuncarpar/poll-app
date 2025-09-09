@@ -1,11 +1,11 @@
-import { VoteOption } from '@repo/types/poll'
+import { PollOption } from '@repo/types'
 
 export const Option = ({
   option,
   handleVote,
   voted
 }: {
-  option: VoteOption
+  option: PollOption
   handleVote: (optionId: string) => Promise<void>
   voted: string | void
 }) => {

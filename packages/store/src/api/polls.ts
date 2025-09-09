@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseApi } from '../config/api'
-import type { Poll } from '@repo/types/poll'
+import type { Poll } from '@repo/types'
 
 export const pollsApi = createApi({
   baseQuery: baseApi,

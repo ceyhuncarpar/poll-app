@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { Poll } from '@repo/types/poll'
+import { Poll } from '@repo/types'
 import { GetPollValidation, VoteValidation } from './polls.validation'
 import { PollsRepository } from './polls.repository'
 
