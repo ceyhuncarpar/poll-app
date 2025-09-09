@@ -4,11 +4,10 @@ import { useVoteMutation, useGetPollByIdQuery } from '@repo/store'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { Option } from './components/option'
-import { Spinner } from '@/components/spinner'
 
 export default function Poll() {
   const { id: pollId } = useParams<{ id: string }>()
-  const { data, isLoading, isError, isFetching } = useGetPollByIdQuery(pollId)
+  const { data, isLoading, isError } = useGetPollByIdQuery(pollId)
   const [vote, { isLoading: isMuationLoading }] = useVoteMutation()
   const [voted, setVoted] = useState<string | void>()
 
@@ -26,19 +25,29 @@ export default function Poll() {
   if (isError) {
     return (
       <Container>
-        <p>Something went wrong while getting the poll.</p>
+        <p className='text-center'>
+          Something went wrong while getting the poll.
+        </p>
       </Container>
     )
   }
 
-  if (!data) return null
+  if (!data) {
+    return (
+      <Container>
+        <p className='text-center'>
+          The poll you are looking for doesn't exist.
+        </p>
+      </Container>
+    )
+  }
 
   return (
     <>
       <LoadingCover active={isMuationLoading} />
 
       <Container>
-        <div className='h-full justify-center content-center max-w-5xl self-center justify-self-center'>
+        <div className='h-full justify-center content-center w-full max-w-[584px] self-center justify-self-center'>
           <p className='font-medium text-2xl text-center'>{data.question}</p>
 
           <p className='mt-4 mb-1 text-sm'>Click any option to vote</p>
