@@ -8,13 +8,11 @@ import { LoadingCover } from '../../components/loading'
 
 export const Poll = () => {
   const pollId = '1'
-  const { data, isLoading, isError, isFetching } = useGetPollByIdQuery(pollId)
+  const { data, isLoading, isError } = useGetPollByIdQuery(pollId)
   const [vote, { isLoading: isMuationLoading }] = useVoteMutation()
   const [voted, setVoted] = useState<string | void>()
 
   async function handleVote(optionId: string) {
-    // if (voted) return
-
     const res = await vote({ id: pollId, optionId })
     if (res.error) return
 
@@ -37,7 +35,13 @@ export const Poll = () => {
     )
   }
 
-  if (!data) return null
+  if (!data) {
+    return (
+      <Container>
+        <Text>The poll you are looking for doesn't exist.</Text>
+      </Container>
+    )
+  }
 
   return (
     <>
